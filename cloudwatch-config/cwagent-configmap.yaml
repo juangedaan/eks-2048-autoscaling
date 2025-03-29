@@ -1,0 +1,28 @@
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cwagent-config
+  namespace: amazon-cloudwatch
+data:
+  cwagentconfig.json: |
+    {
+      "metrics": {
+        "append_dimensions": {
+          "AutoScalingGroupName": "${aws:AutoScalingGroupName}",
+          "ImageId": "${aws:ImageId}",
+          "InstanceId": "${aws:InstanceId}",
+          "InstanceType": "${aws:InstanceType}"
+        },
+        "metrics_collected": {
+          "cpu": {
+            "measurement": [
+              "cpu_usage_idle",
+              "cpu_usage_iowait"
+            ],
+            "metrics_collection_interval": 60,
+            "totalcpu": true
+          }
+        }
+      }
+    }

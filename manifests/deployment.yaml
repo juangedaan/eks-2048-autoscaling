@@ -1,0 +1,27 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: game-2048
+  labels:
+    app: game-2048
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: game-2048
+  template:
+    metadata:
+      labels:
+        app: game-2048
+    spec:
+      containers:
+        - name: game-2048
+          image: public.ecr.aws/l6m2t8p7/docker-2048:latest
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 100m
+            limits:
+              cpu: 200m
